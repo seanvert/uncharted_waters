@@ -1,1 +1,5 @@
 * TODO list
+- [ ] sprites
+- [ ] remove pub fields from structs
+- [ ] find a way to store the objects
+- [ ] print text
