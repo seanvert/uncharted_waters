@@ -2,7 +2,7 @@ pub mod view {
     use graphics::*;
     use crate::app::App;
     use crate::app::Object;
-    use piston_window::RenderArgs; // TODO checar se é isto mesmo ou se é o outro
+    use piston_window::RenderArgs;
     use piston_window::{PistonWindow, clear, Image, Event, rectangle::square};
 	
 	pub struct Sprites {
@@ -80,7 +80,10 @@ pub mod view {
 						   g);								
 			} else {
 				// fallback se não encontrar a sprite
-				rectangle(red, square, transform.trans(app.player.x, app.player.y).rot_rad(app.player.rot).trans(-50.0, -50.0), g);
+				rectangle(red, square,
+						  transform.trans(app.player.x, app.player.y)
+						  .rot_rad(app.player.rot)
+						  .trans(-50.0, -50.0), g);
 			};
 		});
     }
