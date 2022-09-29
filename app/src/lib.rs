@@ -18,12 +18,7 @@ pub mod app {
     pub use crate::controller::control;
     pub use crate::model::model::update;
     use gfx_device_gl::{Resources, CommandBuffer};
-    // use gfx_graphics::TextureContext;
-    // use gfx_graphics::Flip;
-    // use gfx_graphics::Texture;
-    // use gfx_graphics::TextureSettings;
     use piston::event_loop::{EventSettings, Events};
-    // use piston::input::{Input, Key, Button, RenderArgs, RenderEvent, UpdateArgs, UpdateEvent, ButtonEvent, Motion};
     use piston::input::Input::Move;
     use piston::ButtonState;
     use piston::window::WindowSettings;
@@ -94,14 +89,6 @@ pub mod app {
 					println!("{:?}", args);
 				}
 			}
-			let view = crate::view::view::teste {t: 0.0};
-			let model = crate::model::model::teste {t: 0.0};
-			println!("{}", "asd");
-		}
-
-		pub fn test(&mut self) {
-			println!("{:#?}", self.controls);
-			// self.up_d = true;
 		}
     }
 }
