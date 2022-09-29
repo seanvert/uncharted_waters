@@ -9,9 +9,6 @@ pub mod model {
 	pub fn update(app: &mut App, args: &UpdateArgs) {
 		let speed = 500.0;
 
-		// if self.player.no_ar {
-		// 	self.player.move_cannon_ball(1.0);
-		// }
 		if app.controls.up_d {
 			if app.player.y > 0.0 {
 				app.player.mov(0.0, -speed * args.dt);
@@ -63,10 +60,5 @@ pub mod model {
 				}
 			}
 		}
-	}
-
-	
-	pub struct teste {
-		pub t: f64,
 	}
 }
