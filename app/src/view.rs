@@ -1,6 +1,5 @@
 pub mod view {
     use graphics::*;
-    //	use piston_window::*;
     use crate::app::App;
     use crate::app::Object;
     use piston_window::RenderArgs; // TODO checar se é isto mesmo ou se é o outro
@@ -64,7 +63,6 @@ pub mod view {
 		const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
 		let square = rectangle::square(0.0, 0.0, 100.0);
 		let red = [1.0, 0.0, 0.0, 1.0];
-		// self.window_size = [args.window_size[0], args.window_size[1]];
 		gl.draw_2d(e, |c, g, _| {
 			clear(GREEN, g);
 			let transform = c.transform;
@@ -85,8 +83,5 @@ pub mod view {
 				rectangle(red, square, transform.trans(app.player.x, app.player.y).rot_rad(app.player.rot).trans(-50.0, -50.0), g);
 			};
 		});
-    }
-    pub struct teste {
-		pub t: f64,
     }
 }
