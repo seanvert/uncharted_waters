@@ -7,7 +7,6 @@ pub mod object {
 		pub rot: f64,
 		pub x: f64,
 		pub y: f64,
-		vetor_velocidade: [f64; 2],
 		pub sprite: Option<Texture<Resources>>
 	}
 
@@ -16,11 +15,17 @@ pub mod object {
 			Object {
 				rot: 0.0,
 				x: 0.0, y: 0.0,
-				vetor_velocidade: [0.0, 0.0],
 				sprite: None
 			}
 		}
-
+		
+		pub fn new_vec() -> Vec<Object> {
+			let mut objects: Vec<Object> = Vec::with_capacity(30);
+			for i in 0..29 {
+				objects.push(Object::new());
+			}
+			objects
+		}
 		pub fn get_rot(&mut self) -> f64{
 			return self.rot;
 		}

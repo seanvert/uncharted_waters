@@ -1,11 +1,9 @@
 pub mod model {
-	// TODO fazer uma lista de objetos para iterar no render do view
-	// XXX vou iterar isso nos objetos?
 	use std::f64::consts::PI;
 	use piston_window::UpdateArgs;
 	use crate::app::App;
 	use crate::object::object::Object;
-	use crate::controller::control::Control;
+
 	pub fn update(app: &mut App, args: &UpdateArgs) {
 		let speed = 500.0;
 
