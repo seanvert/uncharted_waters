@@ -1,20 +1,19 @@
 pub mod view {
     use graphics::*;
     use crate::app::App;
-    use crate::app::Object;
+    use crate::app::object::Object;
     use piston_window::RenderArgs;
     use piston_window::{PistonWindow, clear, Image, Event, rectangle::square};
-	
+	use gfx_graphics::TextureContext;
+	use gfx_graphics::Flip;
+	use gfx_graphics::Texture;
+	use gfx_graphics::TextureSettings;
+	use piston::window::WindowSettings;
 	pub struct Sprites {
 	// TODO montar as sprites	
 	}
 	// TODO terminar esta função de carregar as sprites
 	pub fn on_load (window : &PistonWindow) {
-		use gfx_graphics::TextureContext;
-		use gfx_graphics::Flip;
-		use gfx_graphics::Texture;
-		use gfx_graphics::TextureSettings;
-		use piston::window::WindowSettings;
 		let assets = find_folder::Search::ParentsThenKids(3, 3)
 			.for_folder("assets").unwrap();
 		let ships = find_folder::Search::ParentsThenKids(3, 3)
@@ -56,8 +55,7 @@ pub mod view {
 	}
     
     pub fn render (app: &mut App, args: &RenderArgs,
-				   gl: &mut PistonWindow, e: &mut Event,
-				   obj: Object
+				   gl: &mut PistonWindow, e: &mut Event
     ) {
 		let image = Image::new().rect(square(0.0, 0.0, 1000.0));
 		const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
@@ -66,12 +64,27 @@ pub mod view {
 		gl.draw_2d(e, |c, g, _| {
 			clear(GREEN, g);
 			let transform = c.transform;
-			// TODO fazer um loop nos objetos e renderizar as coordenadas e as sprites
-			if let Some(sprite) = obj.sprite {
+			// objects render loop
+			for (i, obj) in app.objects.iter().enumerate() {
+				if let Some(sprite) = &obj.sprite {
+					let (sprite_x, sprite_y) = sprite.get_size();
+					let (ocx, ocy) = (sprite_x / 2 , sprite_y / 2);
+					let size = 0.1;
+					image.draw(sprite, &DrawState::new_alpha(),
+							   transform.trans(obj.x,
+											   obj.y)
+							   .rot_rad(obj.rot)
+							   .trans(-(ocx as f64), -(ocy as f64))
+							   .scale(size, size),
+							   g);
+				}
+			}
+			// player render
+			if let Some(sprite) = &app.player.sprite {
 				let (sprite_x, sprite_y) = sprite.get_size();
 				let (ocx, ocy) = (sprite_x / 2 , sprite_y / 2);
 				let size = 0.1;
-				image.draw(&sprite, &DrawState::new_alpha(),
+				image.draw(sprite, &DrawState::new_alpha(),
 						   transform.trans(app.player.x,
 										   app.player.y)
 						   .rot_rad(app.player.rot)
