@@ -13,7 +13,7 @@ mod controller;
 mod model;
 
 pub mod app {
-    pub use crate::object::object::Object;
+    pub use crate::object::object;
     pub use crate::view::view::render;
     pub use crate::controller::control;
     pub use crate::model::model::update;
@@ -26,17 +26,19 @@ pub mod app {
     use graphics::*;
     use graphics::rectangle::square;
 
+
     pub struct App {
 		pub controls: control::Control,
-		// TODO trocar isso para uma lista de objetos
-		pub player: Object,
+		pub objects: Vec<object::Object>,
+		pub player: object::Object,
 		pub window_size: [f64; 2],
     }
 
     impl App {
 		pub fn new() -> App {
 			App {
-				player: Object::new(),
+				player: object::Object::new(),
+				objects: object::Object::new_vec(),
 				controls: control::Control::new(),
 				window_size: [0.0, 0.0],
 			}
@@ -58,7 +60,6 @@ pub mod app {
 			// TODO opção para carregar o jogo
 
 			while let Some(mut e) = events.next(&mut window) {
-
 				if let Some(args) = e.render_args() {
 					// TODO ajeitar o path disso
 					// FIXME passar um iterável com a lista de objetos
@@ -67,10 +68,8 @@ pub mod app {
 					// objetos que serão renderizados na cena
 					// FIXME colocar o obj no model depois e passar
 					// pra cá
-					let mut obj = Object::new();
 					crate::view::view::render(self, &args,
-											  &mut window, &mut e,
-											  obj);
+											  &mut window, &mut e);
 				}
 				if let Some(args) = e.update_args() {
 					crate::model::model::update(self, &args);
