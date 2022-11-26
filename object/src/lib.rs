@@ -1,5 +1,5 @@
 pub mod object {
-
+// TODO: acho que o certo seria encapsular a sprite num tipo próprio dela
     use gfx_graphics::Texture;
     use gfx_device_gl::Resources;
 
@@ -18,10 +18,10 @@ pub mod object {
 				sprite: None
 			}
 		}
-		
+		// TODO: acho que deveria trocar isso para um tipo cena
 		pub fn new_vec() -> Vec<Object> {
 			let mut objects: Vec<Object> = Vec::with_capacity(30);
-			for i in 0..29 {
+			for _i in 0..29 {
 				objects.push(Object::new());
 			}
 			objects

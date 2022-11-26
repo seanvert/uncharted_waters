@@ -1,14 +1,11 @@
 [package]
-name = "app"
+name = "view"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-piston = "0.53.1"
-piston2d-opengl_graphics = "0.81.0"
-view = { path = "../view" }
-sprites = { path = "../sprites" }
-model = { path = "../model" }
 piston_window = "*"
+piston = "0.53.1"
+model = { path = "../model" }
