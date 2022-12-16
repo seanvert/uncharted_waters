@@ -1,0 +1,9 @@
+* roadmap
+** mostrar texto na tela
+*** carregar fonte
+** mostrar o fundo
+** carregar arquivo de sprites
+** definir tamanho das sprites
+** pegar uns desenhos de interface
+** montar uma crate para diálogo
+
