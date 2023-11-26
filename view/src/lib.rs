@@ -3,21 +3,17 @@ pub mod view {
     use piston_window::ImageSize;
     use piston_window::RenderArgs;
     use piston_window::{
-        clear, rectangle, rectangle::square, DrawState, Event, Image, PistonWindow, Transformed,
+        rectangle, rectangle::square, DrawState, Event, Image, PistonWindow, Transformed,
         Window,
     };
     // use piston::window::WindowSettings;
     use model::model;
 
-    pub fn render(app: &mut model::Model, args: &RenderArgs, gl: &mut PistonWindow, e: &mut Event) {
+    pub fn render(app: &mut model::Model, _args: &RenderArgs, gl: &mut PistonWindow, e: &mut Event) {
         let image = Image::new().rect(square(0.0, 0.0, 1000.0));
-        const GREEN: [f32; 4] = [0.0, 1.0, 0.0, 1.0];
         const RED: [f32; 4] = [1.0, 0.0, 0.0, 1.0];
-        const BLUE: [f32; 4] = [0.0, 0.0, 1.0, 1.0];
-        const YELLOW: [f32; 4] = [1.0, 1.0, 0.0, 1.0];
-        let (x, y) = (0.0, 0.0);
         // TODO: depois preciso trocar isso para o tamanho do viewport
-        let size = gl.window.size();
+        let _size = gl.window.size();
         // let (x, y) = (size.width, size.height);
         let square = rectangle::square(0.0, 0.0, 100.0);
         gl.draw_2d(e, |c, g, _| {
@@ -27,56 +23,47 @@ pub mod view {
             // tamanho do tileset
 
             let transform = c.transform;
-            for i in 0..10 {
-                for j in 0..10 {
-                    let n = i as f64;
-                    let m = j as f64;
-                    let offset_x = n * 30.0;
-                    let offset_y = m * 30.0;
-                    rectangle(
-                        RED,
-                        rectangle::square(offset_x, offset_y, 30.0),
-                        transform.trans(x, y),
-                        g,
-                    );
-                    rectangle(
-                        GREEN,
-                        rectangle::square(30.0, 0.0, 30.0),
-                        transform.trans(x, y),
-                        g,
-                    );
-                    rectangle(
-                        BLUE,
-                        rectangle::square(0.0, 30.0, 30.0),
-                        transform.trans(x, y),
-                        g,
-                    );
-                    rectangle(
-                        YELLOW,
-                        rectangle::square(30.0, 30.0, 30.0),
-                        transform.trans(x, y),
-                        g,
-                    );
-                }
-            }
-            // objects render loop
-            for (i, obj) in app.objects.iter().enumerate() {
-                if let Some(sprite) = &obj.sprite {
-                    let (sprite_x, sprite_y) = sprite.get_size();
-                    let (ocx, ocy) = (sprite_x / 2, sprite_y / 2);
-                    let size = 0.1;
-                    image.draw(
-                        sprite,
+			// sea background
+			let sea_sprite = app.objects[72].sprite.as_mut().unwrap();
+			let (sea_sprite_x, sea_sprite_y) = sea_sprite.get_size();
+			let (ocx, ocy) = (sea_sprite_x / 2, sea_sprite_y / 2);
+			let background_lines = 10;
+			let background_columns = 20;
+			let x: u32 = 100;
+			for lines in 0..=background_lines {
+				for columns in 0..=background_columns {
+					image.draw(
+                        sea_sprite,
                         &DrawState::new_alpha(),
                         transform
-                            .trans(obj.x, obj.y)
-                            .rot_rad(obj.rot)
+                            .trans((lines * x) as f64, (columns * x) as f64)
+                            .rot_rad(0.0)
                             .trans(-(ocx as f64), -(ocy as f64))
-                            .scale(size, size),
+                            .scale(0.1, 0.1),
                         g,
                     );
-                }
-            }
+				}
+			}
+
+            // objects render loop
+            // for (_i, obj) in app.objects.iter().enumerate() {
+            //     if let Some(sprite) = &obj.sprite {
+            //         let (sprite_x, sprite_y) = sprite.get_size();
+            //         let (ocx, ocy) = (sprite_x / 2, sprite_y / 2);
+            //         let size = 0.1;
+            //         image.draw(
+            //             sprite,
+            //             &DrawState::new_alpha(),
+            //             transform
+            //                 .trans(obj.x + x, obj.y + x)
+            //                 .rot_rad(obj.rot)
+            //                 .trans(-(ocx as f64), -(ocy as f64))
+            //                 .scale(size, size),
+            //             g,
+            //         );
+            //     }
+			// 	x += 100.0;
+            // }
             // player render
             if let Some(sprite) = &app.player.sprite {
                 let (sprite_x, sprite_y) = sprite.get_size();

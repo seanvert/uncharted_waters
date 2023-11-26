@@ -17,7 +17,7 @@ pub mod model {
         pub fn new() -> Model {
             Model {
                 player: object::Object::new(),
-                objects: object::Object::new_vec(),
+                objects: object::Object::new_vec(100),
                 controls: control::Control::new(),
                 window_size: [0.0, 0.0],
             }

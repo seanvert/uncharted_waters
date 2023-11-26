@@ -1,8 +1,9 @@
 pub mod object {
-    // TODO: acho que o certo seria encapsular a sprite num tipo próprio dela
+
     use gfx_device_gl::Resources;
     use gfx_graphics::Texture;
 
+	#[derive(Debug)]
     pub struct Object {
         pub rot: f64,
         pub x: f64,
@@ -19,10 +20,10 @@ pub mod object {
                 sprite: None,
             }
         }
-        // TODO: acho que deveria trocar isso para um tipo cena
-        pub fn new_vec() -> Vec<Object> {
-            let mut objects: Vec<Object> = Vec::with_capacity(30);
-            for _i in 0..29 {
+
+        pub fn new_vec(n_objects: usize) -> Vec<Object> {
+            let mut objects: Vec<Object> = Vec::with_capacity(n_objects);
+            for _i in 0..n_objects {
                 objects.push(Object::new());
             }
             objects

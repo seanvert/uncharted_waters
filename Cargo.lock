@@ -1649,6 +1649,7 @@ name = "sprites"
 version = "0.1.0"
 dependencies = [
  "find_folder",
+ "model",
  "object",
  "piston_window",
 ]

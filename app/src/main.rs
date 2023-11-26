@@ -47,7 +47,7 @@ pub mod app {
                 .unwrap();
             window.set_max_fps(30);
             let mut events = Events::new(EventSettings::new());
-            sprites::on_load(&mut window, &mut self.model.player);
+            sprites::on_load(&mut window, &mut self.model);
             println!("{} {}", window.size().width, window.size().height);
             // TODO colocar uma rotina para criar um menu
             // TODO opção para carregar o jogo

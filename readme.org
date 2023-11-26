@@ -4,6 +4,5 @@
 ** mostrar o fundo
 ** carregar arquivo de sprites
 ** definir tamanho das sprites
-** pegar uns desenhos de interface
-** montar uma crate para diálogo
+[[parei aqui][node eu parei]]
 
