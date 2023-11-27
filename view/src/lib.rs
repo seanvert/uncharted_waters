@@ -9,7 +9,7 @@ pub mod view {
     // use piston::window::WindowSettings;
     use model::model;
 
-    pub fn render(app: &mut model::Model, _args: &RenderArgs, gl: &mut PistonWindow, e: &mut Event) {
+    pub fn render(model: &mut model::Model, _args: &RenderArgs, gl: &mut PistonWindow, e: &mut Event) {
         let image = Image::new().rect(square(0.0, 0.0, 1000.0));
         const RED: [f32; 4] = [1.0, 0.0, 0.0, 1.0];
         // TODO: depois preciso trocar isso para o tamanho do viewport
@@ -21,10 +21,11 @@ pub mod view {
             // vou precisar do:
             // tamanho do viewport
             // tamanho do tileset
-
+			// TODO: checar se o objeto está visível antes
+			// object.visible
             let transform = c.transform;
 			// sea background
-			let sea_sprite = app.objects[72].sprite.as_mut().unwrap();
+			let sea_sprite = model.objects[72].sprite.as_mut().unwrap();
 			let (sea_sprite_x, sea_sprite_y) = sea_sprite.get_size();
 			let (ocx, ocy) = (sea_sprite_x / 2, sea_sprite_y / 2);
 			let background_lines = 10;
@@ -46,7 +47,7 @@ pub mod view {
 			}
 
             // objects render loop
-            // for (_i, obj) in app.objects.iter().enumerate() {
+            // for (_i, obj) in model.objects.iter().enumerate() {
             //     if let Some(sprite) = &obj.sprite {
             //         let (sprite_x, sprite_y) = sprite.get_size();
             //         let (ocx, ocy) = (sprite_x / 2, sprite_y / 2);
@@ -65,7 +66,7 @@ pub mod view {
 			// 	x += 100.0;
             // }
             // player render
-            if let Some(sprite) = &app.player.sprite {
+            if let Some(sprite) = &model.player.sprite {
                 let (sprite_x, sprite_y) = sprite.get_size();
                 let (ocx, ocy) = (sprite_x / 2, sprite_y / 2);
                 let size = 0.1;
@@ -73,8 +74,8 @@ pub mod view {
                     sprite,
                     &DrawState::new_alpha(),
                     transform
-                        .trans(app.player.x, app.player.y)
-                        .rot_rad(app.player.rot)
+                        .trans(model.player.x, model.player.y)
+                        .rot_rad(model.player.rot)
                         .trans(-(ocx as f64), -(ocy as f64))
                         .scale(size, size),
                     g,
@@ -85,8 +86,8 @@ pub mod view {
                     RED,
                     square,
                     transform
-                        .trans(app.player.x, app.player.y)
-                        .rot_rad(app.player.rot)
+                        .trans(model.player.x, model.player.y)
+                        .rot_rad(model.player.rot)
                         .trans(-50.0, -50.0),
                     g,
                 );
