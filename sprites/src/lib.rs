@@ -11,7 +11,7 @@ pub mod sprites {
         let ships = find_folder::Search::ParentsThenKids(3, 3)
             .for_folder("Ships")
             .unwrap();
-		let _ship_parts = find_folder::Search::ParentsThenKids(3, 3)
+		let ship_parts = find_folder::Search::ParentsThenKids(3, 3)
             .for_folder("Ship parts")
             .unwrap();
 		let _effects = find_folder::Search::ParentsThenKids(3, 3)
@@ -21,7 +21,7 @@ pub mod sprites {
 			.for_folder("Tiles")
 			.unwrap();
 
-		// TODO PAREI AQUI 
+		// FIXME pegar isso de algum jeito melhor depois
 		let mut current_object = model.objects.iter_mut();
 		for num in 1..=96 {
 			let string;
@@ -51,21 +51,18 @@ pub mod sprites {
         )
         .unwrap();
         model.player.set_sprite(ship_sprite);
-    }
 
-    // 	let ship_parts = find_folder::Search::ParentsThenKids(3, 3)
-    // 		.for_folder("Ship parts").unwrap();
-    // 	// TODO pega as pastas
-    // 	//  TODO coloca os arquivos num vetor
-    // 	let ship_sprite = ships.join("ship (1).png");
-    // 	let tank_sprite = assets.join("E-100_preview.png");
-    // 	let cannon_ball_sprite = ship_parts.join("cannonBall.png");
-    // 	// TODO itera o vetor com as texturas
-    // 	let cannon_ball_sprite = Texture::from_path(
-    // 		&mut texture_context,
-    // 		&cannon_ball_sprite,
-    // 		Flip::None,
-    // 		&TextureSettings::new())
-    // 		.unwrap();
-    // }
+    // TODO pega as pastas
+    //  TODO coloca os arquivos num vetor
+    
+    let cannon_ball_sprite = ship_parts.join("cannonBall.png");
+    // TODO itera o vetor com as texturas
+    let cannon_ball_sprite = Texture::from_path(
+    		&mut texture_context,
+    		&cannon_ball_sprite,
+    		Flip::None,
+    		&TextureSettings::new())
+    		.unwrap();
+	model.cannon_ball.set_sprite(cannon_ball_sprite);
+	}
 }

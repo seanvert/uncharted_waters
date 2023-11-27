@@ -64,7 +64,8 @@ pub mod app {
                     view::view::render(&mut self.model, &args, &mut window, &mut e);
                 }
                 if let Some(args) = e.update_args() {
-                    model::update(&mut self.model, &args);
+                    model::update_player(&mut self.model, &args);
+					model::update_cannon_ball(&mut self.model, &args);
                 }
                 if let Some(inp) = e.button_args() {
                     self.model.controls.on_input(piston::Input::Button(inp));

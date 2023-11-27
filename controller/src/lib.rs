@@ -8,6 +8,8 @@ pub mod control {
         pub left_d: bool,
         pub right_d: bool,
         pub cursor: [f64; 2],
+		pub right_click: bool,
+		pub left_click: bool,
     }
 
     impl Control {
@@ -18,6 +20,8 @@ pub mod control {
                 left_d: false,
                 right_d: false,
                 cursor: [0.0, 0.0],
+				right_click: false,
+				left_click: false,
             }
         }
 
@@ -48,8 +52,10 @@ pub mod control {
                                     self.right_d = true;
                                 }
                                 Button::Mouse(MouseButton::Left) => {
-                                    // DEBUG
-                                    println!("{:#?}", self.cursor);
+									self.left_click = true;
+                                }
+								Button::Mouse(MouseButton::Right) => {
+									self.right_click = true;
                                 }
                                 _ => {}
                             }
@@ -66,6 +72,15 @@ pub mod control {
                             }
                             Button::Keyboard(Key::Right) => {
                                 self.right_d = false;
+                            }
+							Button::Mouse(MouseButton::Left) => {
+								self.left_click = false;
+
+							}
+							Button::Mouse(MouseButton::Right) => {
+								self.right_click = false;
+								// DEBUG
+                                println!("{:#?}", self.cursor);
                             }
                             _ => {}
                         },
