@@ -92,6 +92,36 @@ pub mod view {
                     g,
                 );
             };
+
+			// cannon ball sprite
+			if model.cannon_ball.visible {
+				if let Some(sprite) = &model.cannon_ball.sprite {
+					let (sprite_x, sprite_y) = sprite.get_size();
+					let (ocx, ocy) = (sprite_x / 2, sprite_y / 2);
+					let size = 0.1;
+					image.draw(
+						sprite,
+						&DrawState::new_alpha(),
+						transform
+							.trans(model.cannon_ball.x, model.cannon_ball.y)
+							.rot_rad(model.cannon_ball.rot)
+							.trans(-(ocx as f64), -(ocy as f64))
+							.scale(size, size),
+						g,
+					);
+				} else {
+					// fallback se não encontrar a sprite
+					rectangle(
+						RED,
+						square,
+						transform
+							.trans(model.cannon_ball.x, model.cannon_ball.y)
+							.rot_rad(model.cannon_ball.rot)
+							.trans(-50.0, -50.0),
+						g,
+					);
+				};
+			}
         });
     }
 }
