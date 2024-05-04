@@ -10,3 +10,5 @@ find_folder = "*"
 piston_window = "*"
 object = { path = "../object" }
 model = { path = "../model" }
+gfx = "*"
+gfx_core = "*"

@@ -4,6 +4,5 @@
 ** mostrar o fundo
 ** carregar arquivo de sprites
 ** definir tamanho das sprites
-[[parei aqui][node eu parei]]
-* parei aqui
-[[estava mexendo aqui para implmentar a bolade canhão][cannon]]
+
+

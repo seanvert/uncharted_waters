@@ -1,8 +1,11 @@
 pub mod model {
     use controller::control;
     pub use object::object;
-    use piston_window::UpdateArgs;
+    use piston_window::{UpdateArgs};
+	use gfx_device_gl::Resources;
+	use gfx_graphics::Texture;
     use std::f64::consts::PI;
+	use std::collections::HashMap;
     // use crate::app::App;
     // use crate::object::object::Object;
 
@@ -13,6 +16,10 @@ pub mod model {
         pub objects: Vec<object::Object>,
         pub controls: control::Control,
         pub window_size: [f64; 2],
+		pub tile_textures: HashMap<String, Texture<Resources>>,
+		pub ship_parts_textures: HashMap<String, Texture<Resources>>,
+		pub ships_textures: HashMap<String, Texture<Resources>>,
+		pub effects_textures: HashMap<String, Texture<Resources>>,
     }
 
     impl Model {
@@ -24,9 +31,29 @@ pub mod model {
                 objects: object::Object::new_vec(100),
                 controls: control::Control::new(),
                 window_size: [0.0, 0.0],
+				tile_textures: HashMap::new(),
+				ships_textures: HashMap::new(),
+				ship_parts_textures: HashMap::new(),
+				effects_textures: HashMap::new(),
             }
         }
+
+		pub fn add_tile_texture(&mut self, filename: String, texture: Texture<Resources>) {
+            println!("tile texture: {}", filename);
+			self.tile_textures.insert(filename, texture);
+		}
+		pub fn add_ships_parts_texture(&mut self, filename: String, texture: Texture<Resources>) {
+			self.ship_parts_textures.insert(filename, texture);
+		}
+		pub fn add_ships_texture(&mut self, filename: String, texture: Texture<Resources>) {
+			self.ships_textures.insert(filename, texture);
+		}
+		pub fn add_effects_texture(&mut self, filename: String, texture: Texture<Resources>) {
+			self.effects_textures.insert(filename, texture);
+		}
     }
+
+
 
 	pub fn update_cannon_ball (model: &mut Model, args: &UpdateArgs) {
 		let max_cannon_ball_distance = 100.0;

@@ -9,3 +9,6 @@ edition = "2021"
 piston_window = "*"
 object = { path = "../object" }
 controller = { path = "../controller" }
+gfx_device_gl = "*"
+piston2d-gfx_graphics = "*"
+
